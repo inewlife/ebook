@@ -8,7 +8,7 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repos
 RUN apk add --update \
     bash \
     git \
-    python \
+    python3 \
     python-dev \
     py-pip \
     wget \
