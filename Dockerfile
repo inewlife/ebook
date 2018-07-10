@@ -7,6 +7,7 @@ ENV CALIBRE_INSTALLER_SOURCE_CODE_URL https://raw.githubusercontent.com/kovidgoy
 RUN apk update && \
     apk add --no-cache --upgrade \
     bash \
+    font-adobe-100dpi \
     ca-certificates \
     gcc \
     mesa-gl \
