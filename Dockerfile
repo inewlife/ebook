@@ -1,16 +1,18 @@
-FROM       docker.io/alpine:latest
-MAINTAINER demo <juest a demo>
-
-ENV TZ "Asia/Shanghai"
-
-RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repositories
-
-RUN apk add --update \
+FROM jeanblanchard/alpine-glibc
+MAINTAINER Laird Nelson <ljnelson@gmail.com>
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/calibre/lib
+ENV PATH $PATH:/opt/calibre/bin
+ENV CALIBRE_INSTALLER_SOURCE_CODE_URL https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py
+RUN apk update && \
+    apk add --no-cache --upgrade \
     bash \
-    git \
-    python3 \
-    python-dev \
-    py-pip \
+    ca-certificates \
+    gcc \
+    mesa-gl \
+    python \
+    qt5-qtbase-x11 \
     wget \
-    build-base
-RUN wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+    xdg-utils \
+    xz && \
+    wget -O- ${CALIBRE_INSTALLER_SOURCE_CODE_URL} | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main(install_dir='/opt', isolated=True)" && \
+    rm -rf /tmp/calibre-installer-cache
