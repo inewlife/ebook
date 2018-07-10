@@ -2,6 +2,7 @@ FROM jeanblanchard/alpine-glibc
 MAINTAINER Laird Nelson <ljnelson@gmail.com>
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/calibre/lib
 ENV PATH $PATH:/opt/calibre/bin
+ENV LANG zh_CN.UTF-8
 ENV CALIBRE_INSTALLER_SOURCE_CODE_URL https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py
 RUN apk update && \
     apk add --no-cache --upgrade \
