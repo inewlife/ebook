@@ -13,6 +13,8 @@ RUN apk update && \
     qt5-qtbase-x11 \
     wget \
     xdg-utils \
+    libxcomposite-dev \
+    libxrender \
     xz && \
     wget -O- ${CALIBRE_INSTALLER_SOURCE_CODE_URL} | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main(install_dir='/opt', isolated=True)" && \
     rm -rf /tmp/calibre-installer-cache
